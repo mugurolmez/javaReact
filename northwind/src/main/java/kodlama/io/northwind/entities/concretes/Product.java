@@ -8,11 +8,12 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Entity
+
 @Table(name="products")
 @Data//getter setter olusturma lombok anatasyonu
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Product {
 	@Id
 	@GeneratedValue

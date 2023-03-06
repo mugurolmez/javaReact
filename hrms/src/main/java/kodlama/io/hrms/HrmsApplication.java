@@ -1,15 +1,13 @@
-package kodlama.io.northwind;
+package kodlama.io.hrms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-
-
-public class NorthwindApplication {
+public class HrmsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NorthwindApplication.class, args);
+		SpringApplication.run(HrmsApplication.class, args);
 	}
 
 }
