@@ -1,10 +1,6 @@
 package kodlama.io.northwind.entities.concretes;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,12 +12,12 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Product {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//farklı verı tabanlarında farklı olabılır
 	@Column(name="product_id")
 	private int id;
 	
-	@Column(name="category_id")
-	private int categoryId;
+	//@Column(name="category_id")
+	//private int categoryId;
 	
 	@Column(name="product_name")
 	private String productName;
@@ -34,8 +30,10 @@ public class Product {
 	
 	@Column(name="quantity_per_unit")
 	private String quantityPerUnit;
-	
 
+	@ManyToOne()
+	@JoinColumn(name = "category_id")
+	private Category category;
 	
 
 	}
