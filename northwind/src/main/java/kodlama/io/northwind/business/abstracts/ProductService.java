@@ -4,6 +4,7 @@ import java.util.List;
 
 import kodlama.io.northwind.core.utilities.results.DataResult;
 import kodlama.io.northwind.core.utilities.results.Result;
+import kodlama.io.northwind.entities.dtos.ProductWithCategoryDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,7 @@ public interface ProductService {
 	DataResult <List<Product>> getByProductNameStartsWith(String productName);
 
 	DataResult <List<Product>> getByNameAndCategory(String productName, int categoryId);
+
+	DataResult <List<ProductWithCategoryDto>> getProductWithCategoryDetails();
 
 	}

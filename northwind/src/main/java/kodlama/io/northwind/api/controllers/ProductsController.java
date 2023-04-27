@@ -4,6 +4,7 @@ import java.util.List;
 
 import kodlama.io.northwind.core.utilities.results.DataResult;
 import kodlama.io.northwind.core.utilities.results.Result;
+import kodlama.io.northwind.entities.dtos.ProductWithCategoryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,4 +57,11 @@ public class ProductsController {//products cogul kullanım isimlendirme kuralı
 	public DataResult<List<Product>> getAllSorted(){
 		return this.productService.getAllSorted();
 	}
+
+	@GetMapping("/getProductWithCategoryDetails")//veriyi ver HTTP Requestleri/get isteği gondereceğim
+	public DataResult <List<ProductWithCategoryDto>> getProductWithCategoryDetails(){
+		return this.productService.getProductWithCategoryDetails() ;
+
+	}
+
 }

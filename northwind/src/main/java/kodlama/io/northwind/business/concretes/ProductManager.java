@@ -8,6 +8,7 @@ import kodlama.io.northwind.core.utilities.results.DataResult;
 import kodlama.io.northwind.core.utilities.results.Result;
 import kodlama.io.northwind.core.utilities.results.SuccessDataResult;
 import kodlama.io.northwind.core.utilities.results.SuccessResult;
+import kodlama.io.northwind.entities.dtos.ProductWithCategoryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -98,6 +99,11 @@ public class ProductManager implements ProductService {
 	public DataResult <List<Product>> getByNameAndCategory(String productName, int categoryId) {
 		return new SuccessDataResult<List<Product>>
 				(this.productDao.getByNameAndCategory(productName,categoryId),"Data Listelendi");
+	}
+
+	@Override
+	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails() {
+		return new SuccessDataResult<List<ProductWithCategoryDto>>(this.productDao.getProductWithCategoryDetails(),"Data listelendi");
 	}
 
 }
