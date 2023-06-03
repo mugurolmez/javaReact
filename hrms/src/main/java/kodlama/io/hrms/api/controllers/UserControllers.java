@@ -1,39 +1,56 @@
 package kodlama.io.hrms.api.controllers;
 
+import jakarta.validation.Valid;
 import kodlama.io.hrms.business.abstracts.UserService;
-import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.core.utilities.results.SuccessResult;
-import kodlama.io.hrms.entities.JobDescriptions;
+import kodlama.io.hrms.business.dtos.requests.AddUserRequest;
+import kodlama.io.hrms.business.dtos.responses.GetAllUsersResponse;
+import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
 import kodlama.io.hrms.entities.User;
-import kodlama.io.hrms.dataAcces.abstracts.UserDao;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/user")
-
-
+@RequestMapping("api/users")
 public class UserControllers {
 
-    UserService userService;
-    UserDao userDao;
+    private UserService userService;
+
     @Autowired
-    public UserControllers(UserService userService,UserDao userDao) {
+    public UserControllers(UserService userService) {
         this.userService = userService;
-        this.userDao= userDao;
     }
 
-    @PostMapping("/add")
-    public Result add(@RequestBody User user){
-
-        return  this.userService.add(user);
-    }
     @GetMapping("/getall")
-    public List<User> getall() {
+    public List<GetAllUsersResponse> getall() {
 
-        return this.userDao.findAll();
+        return userService.getAll();
     }
+    @PostMapping(value = "/add")
+    public ResponseEntity<?> add(@Valid @RequestBody AddUserRequest addUserRequest) {
+
+        return ResponseEntity.ok(this.userService.add(addUserRequest));
+    }
+
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions) {
+        Map<String, String> validationErrors = new HashMap<String, String>();
+        for (FieldError fieldError : exceptions.getBindingResult().getFieldErrors()) {
+            validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors, "Doğrulama hataları");
+        return errors;
+    }
+
 }
+
+

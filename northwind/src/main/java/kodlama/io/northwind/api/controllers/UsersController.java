@@ -36,6 +36,7 @@ public class UsersController {
 
     //bu sistemde su turde hata olursa bu metodu devreye sok
 
+    //aop
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){

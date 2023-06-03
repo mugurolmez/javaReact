@@ -1,34 +1,32 @@
 package kodlama.io.hrms.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Table(name="users")
-@Entity
+import org.springframework.stereotype.Component;
+
+@Component
 @Data
+@Entity
+@Table(name="users")
 @AllArgsConstructor
 @NoArgsConstructor
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+
     @Id
-    @Column(name="user_id")
-    @GeneratedValue
-    private int id;
-    @NotBlank
-    @NotBlank
-    @Column(name="user_name")
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private int userId;
 
-    @Column(name="user_lastname")
-    private String lastName;
 
-    @Column(name="nationality_id")
-    private String nationalityId;
-
-    @Column(name="user_email")
     private String email;
 
-    @Column(name="user_password")
+
+    @Column(name = "password")
     private String password;
 }

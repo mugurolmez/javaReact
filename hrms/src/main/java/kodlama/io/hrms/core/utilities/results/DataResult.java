@@ -1,19 +1,22 @@
 package kodlama.io.hrms.core.utilities.results;
+
 //<T> generic data ekleme
 //super base sunınıfın constructorlerini çalıştırmaya yarıyor Resulttab çekecek
-public class DataResult<T>  extends  Result{
+public class DataResult<T> extends Result {
     private T data;
-    public DataResult(T data,boolean success, String message) {
-        super(success,message);
+
+    public DataResult(T data, boolean success, String message) {
+        super(success, message);
         this.data = data;
     }
-    public DataResult(T data,boolean success) {
+
+    public DataResult(T data, boolean success) {
         super(success);
         this.data = data;
     }
 
-    public T getData(){
-        return  this.data;
+    public T getData() {
+        return this.data;
     }
 
 }
