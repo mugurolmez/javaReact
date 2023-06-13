@@ -1,9 +1,11 @@
 package kodlama.io.hrms.api.controllers;
 
 import jakarta.validation.Valid;
-import kodlama.io.hrms.business.abstracts.JobService;
+import kodlama.io.hrms.business.abstracts.JobDescriptionService;
+import kodlama.io.hrms.business.dtos.requests.AddJobDescriptionRequest;
+import kodlama.io.hrms.business.dtos.responses.GetAllJobDescriptionsResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
-import kodlama.io.hrms.entities.Job;
+import kodlama.io.hrms.entities.JobDescription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,33 +18,28 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/jobs")
+@RequestMapping("/api/jobdescriptions")
 
 
-public class JobControllers {
+public class JobDescriptionsControllers {
     @Autowired
-    private JobService jobService;
+    private JobDescriptionService jobDescriptionService;
 
-    public JobControllers(JobService jobDescriptionService) {
-        this.jobService = jobDescriptionService;
+    public JobDescriptionsControllers(JobDescriptionService jobDescriptionService) {
+        this.jobDescriptionService = jobDescriptionService;
     }
 
-
     @GetMapping("/getall")
-    public List<Job> getall() {
+    public List<GetAllJobDescriptionsResponse> getall() {
 
-        return this.jobService.getAll();
+        return this.jobDescriptionService.getAll();
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity<?> add(@Valid @RequestBody Job job) {
-        //responseEntity<?> kayıt ısleminin durumuna gore succes yada error donecek onu işlemin sonucu belirleyecek
-        //Aop bütün metodların onune global ex.handler yazarız tum operasyonlara try catch yazmak yerıne 1 tane yazarsın tum operasyonlar
-        //bunun ıcınden gecer
+    public ResponseEntity<?> add(@Valid @RequestBody AddJobDescriptionRequest addJobDescriptionRequest) {
 
-        //bu sistemde su turde hata olursa bu metodu devreye sok
 
-        return ResponseEntity.ok(this.jobService.add(job));
+        return ResponseEntity.ok(this.jobDescriptionService.add(addJobDescriptionRequest));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

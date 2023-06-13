@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class AddJobSeekerRequest {
     @NotNull(message = "Mail Boş olamaz")
     @NotBlank(message = "Mail Boş olamaz")
-    @Pattern(regexp = "^(.+)@" ,message= "Geçerli bir Email Adresi Giriniz")
+    @Email(message= "Geçerli bir Email Adresi Giriniz")
     @Column(name = "email")
     private String email;
 
