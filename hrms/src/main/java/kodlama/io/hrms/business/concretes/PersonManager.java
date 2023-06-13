@@ -5,18 +5,16 @@ import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAcces.abstracts.PersonDao;
 import kodlama.io.hrms.entities.Person;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@AllArgsConstructor
 public class PersonManager implements PersonService {
     @Autowired
     private PersonDao personDao;
-
-    public PersonManager(PersonDao personDao) {
-        this.personDao = personDao;
-    }
 
     @Override
     public Result add(Person person) {

@@ -1,13 +1,12 @@
 package kodlama.io.hrms.api.controllers;
 
 import jakarta.validation.Valid;
-import kodlama.io.hrms.business.abstracts.UserService;
-import kodlama.io.hrms.business.dtos.requests.AddUserRequest;
-import kodlama.io.hrms.business.dtos.responses.GetAllUsersResponse;
+import kodlama.io.hrms.business.abstracts.EmployerService;
+import kodlama.io.hrms.business.dtos.requests.AddEmployerRequest;
+import kodlama.io.hrms.business.dtos.requests.AddJobSeekerRequest;
+import kodlama.io.hrms.business.dtos.responses.GetAllEmployersResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.entities.User;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,24 +19,30 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/users")
-@AllArgsConstructor
-public class UserControllers {
+@RequestMapping("/api/employers")
+
+public class EmloyerControllers {
+
+    private EmployerService employerService;
     @Autowired
-    private UserService userService;
+    public EmloyerControllers(EmployerService employerService) {
+        this.employerService = employerService;
+    }
+
+
 
     @GetMapping("/getall")
-    public List<GetAllUsersResponse> getall() {
+    public List<GetAllEmployersResponse> getAll(){
 
-        return userService.getAll();
+        return this.employerService.getAll();
     }
+
 
     @PostMapping(value = "/add")
-    public ResponseEntity<?> add(@Valid @RequestBody AddUserRequest addUserRequest) {
+    public ResponseEntity<?> add(@Valid @RequestBody AddEmployerRequest addEmployerRequest) {
 
-        return ResponseEntity.ok(this.userService.add(addUserRequest));
+        return ResponseEntity.ok(this.employerService.add(addEmployerRequest));
     }
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -49,7 +54,4 @@ public class UserControllers {
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors, "Doğrulama hataları");
         return errors;
     }
-
 }
-
-

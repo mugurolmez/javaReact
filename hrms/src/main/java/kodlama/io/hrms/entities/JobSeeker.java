@@ -10,26 +10,30 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @Entity
 @Table(name="job_seekers")
 @AllArgsConstructor
 @NoArgsConstructor
-//@PrimaryKeyJoinColumn(name="job_seeker_id", referencedColumnName = "id")
-//@EqualsAndHashCode(callSuper=false)
-public class JobSeeker {
+//@PrimaryKeyJoinColumn(name="person_id")
+//@EqualsAndHashCode(callSuper = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class JobSeeker{
 
     @Id
-    @Column(name = "jobSeeker_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private int jobSeekerId;
+    @Column(name = "jobSeeker_id")
+    private int jobSeekerId;
 
-
-    @Valid
-    @OneToOne(cascade = {CascadeType.ALL})//birebir ilişkide ilişkili tabloda ki id silinirse jobseekerde silinecek
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
     private Person person;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+
+    // Diğer özellikler ve ilişkiler
 }

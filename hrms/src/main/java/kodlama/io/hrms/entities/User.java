@@ -1,5 +1,6 @@
 package kodlama.io.hrms.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Table(name="users")
 @AllArgsConstructor
 @NoArgsConstructor
+
 //@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
@@ -23,10 +25,13 @@ public class User {
     @Column(name = "user_id")
     private int userId;
 
-
+    @Email
     private String email;
 
-
+    @NotBlank
     @Column(name = "password")
     private String password;
+
+
+
 }

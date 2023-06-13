@@ -1,27 +1,34 @@
 package kodlama.io.hrms.business.dtos.requests;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
+import java.time.LocalDate;
 @Data
+@Component
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddUserRequest {
-    @NotNull(message = "Mail Alanı Zorunludur")
-    @NotBlank(message = "Mail Alanı Zorunludur")
-    @Email(message = "Email formatı Geçerli Değil")
-    @Column(name = "email")
-    private String email;
+
+public class AddPersonRequest {
+    @NotNull
+    @NotBlank
+    private String name;
 
     @NotNull
     @NotBlank
-    private String password;
+    private String lastName;
+
+    @NotNull
+    private LocalDate birthDate;
+
+    @Pattern(regexp = "\\d{11}",message ="TC Kimlik No 11 Haneli Sayı Olmalıdır" )
+    private String nationalityNumber;
+
+
 }

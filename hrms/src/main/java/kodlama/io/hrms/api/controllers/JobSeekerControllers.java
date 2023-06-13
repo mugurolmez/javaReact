@@ -2,9 +2,12 @@ package kodlama.io.hrms.api.controllers;
 
 import jakarta.validation.Valid;
 import kodlama.io.hrms.business.abstracts.JobSeekerService;
+import kodlama.io.hrms.business.dtos.requests.AddJobSeekerRequest;
+import kodlama.io.hrms.business.dtos.responses.GetAllJobSeekersResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
-import kodlama.io.hrms.entities.JobSeeker;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -17,24 +20,27 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/jobseekers")
+@EnableJpaRepositories
+
 public class JobSeekerControllers {
-    private JobSeekerService jobSeekerService;
     @Autowired
+    private JobSeekerService jobSeekerService;
+
     public JobSeekerControllers(JobSeekerService jobSeekerService) {
         this.jobSeekerService = jobSeekerService;
 
     }
 
     @GetMapping("/getall")
-    public List<JobSeeker> getall() {
+    public List<GetAllJobSeekersResponse> getall() {
 
         return this.jobSeekerService.getAll();
     }
+
     @PostMapping(value = "/add")
-    public ResponseEntity<?> add(@Valid @RequestBody JobSeeker jobSeeker) {
+    public ResponseEntity<?> add(@Valid @RequestBody AddJobSeekerRequest addJobSeekerRequest) {
 
-
-        return ResponseEntity.ok(this.jobSeekerService.add(jobSeeker));
+        return ResponseEntity.ok(this.jobSeekerService.add(addJobSeekerRequest));
     }
 
 
