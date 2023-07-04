@@ -1,6 +1,5 @@
 package kodlama.io.hrms.business.dtos.requests;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

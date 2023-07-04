@@ -11,17 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @Entity
-@Table(name="users")
+@Table(name="temporary_employers")
 @AllArgsConstructor
 @NoArgsConstructor
-
-//@Inheritance(strategy = InheritanceType.JOINED)
-public class User {
-
+public class TemporaryEmployer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "temporary_employer_id")
+    private int temporaryEmployerId;
 
     @Email
     private String email;
@@ -29,7 +26,13 @@ public class User {
     @NotBlank
     @Column(name = "password")
     private String password;
-
-
+    @Column(name = "corporate_name")
+    private String corporateName;
+    @Column(name = "web_site")
+    private String webSite;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "approval_status")
+    private boolean verifyStatus=false;
 
 }

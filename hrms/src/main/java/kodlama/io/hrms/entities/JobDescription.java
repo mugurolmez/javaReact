@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class JobDescription {
     @Id
-    @Column(name = "id")
+    @Column(name = "job_description_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int jobDescriptionId;
 

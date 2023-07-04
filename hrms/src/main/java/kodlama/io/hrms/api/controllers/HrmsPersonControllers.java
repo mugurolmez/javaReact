@@ -1,10 +1,13 @@
 package kodlama.io.hrms.api.controllers;
 
 import jakarta.validation.Valid;
-import kodlama.io.hrms.business.abstracts.PersonService;
+import kodlama.io.hrms.business.abstracts.HrmsPersonService;
+import kodlama.io.hrms.business.dtos.requests.AddEmployerVerifyRequest;
+import kodlama.io.hrms.business.dtos.requests.AddHrmsPersonRequest;
+import kodlama.io.hrms.business.dtos.responses.GetAllHrmsPersonResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
-import kodlama.io.hrms.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,25 +19,32 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/persons")
-public class PersonControllers {
+@RequestMapping("api/hrmsPersons")
+@EnableJpaRepositories
+public class HrmsPersonControllers {
     @Autowired
-    private PersonService personService;
+    private HrmsPersonService hrmsPersonService;
 
-    public PersonControllers(PersonService personService) {
-        this.personService = personService;
+    public HrmsPersonControllers(HrmsPersonService hrmsPersonService) {
+        this.hrmsPersonService = hrmsPersonService;
+
     }
 
+    @GetMapping("/get-all")
+    public List<GetAllHrmsPersonResponse> getall() {
 
-    @GetMapping("/getall")
-    public List<Person> getall() {
-
-        return this.personService.getAll();
+        return this.hrmsPersonService.getAll();
     }
+
     @PostMapping(value = "/add")
-    public ResponseEntity<?> add(@Valid @RequestBody Person person) {
+    public ResponseEntity<?> add(@Valid @RequestBody AddHrmsPersonRequest addHrmsPersonRequest) {
 
-        return ResponseEntity.ok(this.personService.add(person));
+        return ResponseEntity.ok(this.hrmsPersonService.add(addHrmsPersonRequest));
+    }
+    @PostMapping(value = "/verify-employer")
+    public ResponseEntity<?> verifyEmployer(AddEmployerVerifyRequest addEmployerVerifyRequest) {
+        return ResponseEntity.ok(this.hrmsPersonService.verifyEmployer(addEmployerVerifyRequest));
+
     }
 
 
@@ -48,4 +58,6 @@ public class PersonControllers {
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors, "Doğrulama hataları");
         return errors;
     }
+
+
 }

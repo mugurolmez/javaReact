@@ -5,8 +5,6 @@ import kodlama.io.hrms.business.abstracts.UserService;
 import kodlama.io.hrms.business.dtos.requests.AddUserRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllUsersResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
-import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.entities.User;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

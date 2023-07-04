@@ -5,7 +5,7 @@ import kodlama.io.hrms.business.abstracts.JobDescriptionService;
 import kodlama.io.hrms.business.dtos.requests.AddJobDescriptionRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllJobDescriptionsResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
-import kodlama.io.hrms.entities.JobDescription;
+import kodlama.io.hrms.core.utilities.results.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/jobdescriptions")
+@RequestMapping("/api/jobDescriptions")
 
 
-public class JobDescriptionsControllers {
+public class JobDescriptionControllers {
     @Autowired
     private JobDescriptionService jobDescriptionService;
 
-    public JobDescriptionsControllers(JobDescriptionService jobDescriptionService) {
+    public JobDescriptionControllers(JobDescriptionService jobDescriptionService) {
         this.jobDescriptionService = jobDescriptionService;
     }
 
@@ -33,6 +33,12 @@ public class JobDescriptionsControllers {
     public List<GetAllJobDescriptionsResponse> getall() {
 
         return this.jobDescriptionService.getAll();
+    }
+
+
+    @GetMapping("/{id}")//{} değişkenden gelecek değer
+    public Result getById(@PathVariable int id){
+        return jobDescriptionService.getById(id);
     }
 
     @PostMapping(value = "/add")

@@ -5,9 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class GetAllJobDescriptionsResponse {
-    private int id;
+@AllArgsConstructor
+public class GetByIdJobDescriptionResponse {
+
+    private int jobDescriptionId;
     private String jobDescriptionName;
+
+
 }

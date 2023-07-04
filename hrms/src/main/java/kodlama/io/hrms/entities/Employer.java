@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employer_id")
@@ -20,12 +21,12 @@ public class Employer {
 
     @Column(name = "corporate_name")
     private String corporateName;
+
     @Column(name = "web_site")
     private String webSite;
+
     @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name = "aproval_status")
-    private boolean approvalStatus=false;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

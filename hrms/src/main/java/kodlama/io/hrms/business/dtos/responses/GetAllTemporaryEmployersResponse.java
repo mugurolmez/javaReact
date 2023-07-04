@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllEmployersResponse {
+public class GetAllTemporaryEmployersResponse {
     private int userId;
     private String email;
     private String password;
@@ -15,5 +15,7 @@ public class GetAllEmployersResponse {
     private String corporateName;
     private String webSite;
     private String phoneNumber;
+    private boolean approvalStatus;
+
 
 }

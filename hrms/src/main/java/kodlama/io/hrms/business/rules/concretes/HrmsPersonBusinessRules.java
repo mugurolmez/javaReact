@@ -8,20 +8,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 @NoArgsConstructor
-public class JobSeekerBusinessRules {
+public class HrmsPersonBusinessRules {
     private UserDao userDao;
     private PersonDao personDao;
     @Autowired
-    public JobSeekerBusinessRules(UserDao userDao,PersonDao personDao) {
+    public HrmsPersonBusinessRules(UserDao userDao,PersonDao personDao) {
         this.userDao = userDao;
         this.personDao=personDao;
     }
 
-    public boolean checkIfJobseekerEmailExists(String email) {
+    public boolean checkIfHrmsPersonEmailExists(String email) {
         return this.userDao.existsByEmail(email);
     }
-    public boolean checkIfJobSeekerNationalityNumber(String nationalityNumber) {
+    public boolean checkIfHrmsPersonNationalityNumber(String nationalityNumber) {
         return this.personDao.existsByNationalityNumber(nationalityNumber);
     }
-
 }

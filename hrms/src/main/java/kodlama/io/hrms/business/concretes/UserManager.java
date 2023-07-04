@@ -13,7 +13,6 @@ import kodlama.io.hrms.dataAcces.abstracts.UserDao;
 import kodlama.io.hrms.entities.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,7 +1,7 @@
 package kodlama.io.hrms.core.utilities.results;
 
 //<T> generic data ekleme
-//super base sunınıfın constructorlerini çalıştırmaya yarıyor Resulttab çekecek
+//super base sunınıfın constructorlerini çalıştırmaya yarıyor Resulttan çekecek
 public class DataResult<T> extends Result {
     private T data;
 

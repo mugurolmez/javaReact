@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllJobDescriptionsResponse {
+public class GetAllEmployerVerifiesResponse {
     private int id;
-    private String jobDescriptionName;
+    private int hrmsPersonId;
+    private int employerId;
+    private int temporaryEmployerId;
+    private String comment;
 }

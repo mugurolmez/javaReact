@@ -6,22 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Entity
-@Table(name="job_seekers")
+@Table(name="hrms_persons")
 @AllArgsConstructor
 @NoArgsConstructor
-//@PrimaryKeyJoinColumn(name="person_id")
-//@EqualsAndHashCode(callSuper = false)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class JobSeeker{
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class HrmsPerson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "job_seeker_id")
-    private int jobSeekerId;
+    @Column(name = "hrms_person_id")
+    private int hrmsPersonId;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
@@ -30,11 +26,4 @@ public class JobSeeker{
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-
-    @OneToMany(mappedBy = "jobSeeker")//diğer tabloda tanımladıgımız jobseeker bağlan bağlantı buradan olacak
-    private List<JobAdvertisement> jobAdvertisements;//bağlanılacak class ismi jobadvertisements diğer tabloda birden fazla olabilir
-
-
-    // Diğer özellikler ve ilişkiler
 }

@@ -1,12 +1,12 @@
 package kodlama.io.hrms.api.controllers;
 
 import jakarta.validation.Valid;
-import kodlama.io.hrms.business.abstracts.EmployerService;
-import kodlama.io.hrms.business.dtos.requests.AddEmployerRequest;
-import kodlama.io.hrms.business.dtos.requests.AddJobSeekerRequest;
-import kodlama.io.hrms.business.dtos.responses.GetAllEmployersResponse;
+import kodlama.io.hrms.business.abstracts.TemporaryEmployerService;
+import kodlama.io.hrms.business.dtos.requests.AddTemporaryEmployerRequest;
+import kodlama.io.hrms.business.dtos.responses.GetAllTemporaryEmployersResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
+import kodlama.io.hrms.entities.TemporaryEmployer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,31 +17,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/employers")
+@RequestMapping("/api/temporaryEmployers")
 
-public class EmloyerControllers {
+public class TemporaryEmployerControllers {
 
-    private EmployerService employerService;
+    private TemporaryEmployerService temporaryEmployerService;
     @Autowired
-    public EmloyerControllers(EmployerService employerService) {
-        this.employerService = employerService;
+    public TemporaryEmployerControllers(TemporaryEmployerService temporaryEmployerService) {
+        this.temporaryEmployerService = temporaryEmployerService;
     }
 
 
 
     @GetMapping("/getall")
-    public List<GetAllEmployersResponse> getAll(){
+    public List<GetAllTemporaryEmployersResponse> getAll(){
 
-        return this.employerService.getAll();
+        return this.temporaryEmployerService.getAll();
+    }
+
+    @GetMapping("/{id}")//{} değişkenden gelecek değer
+    public Result getById(@PathVariable int id){
+        return temporaryEmployerService.getById(id);
     }
 
 
-    @PostMapping(value = "/add")
-    public ResponseEntity<?> add(@Valid @RequestBody AddEmployerRequest addEmployerRequest) {
 
-        return ResponseEntity.ok(this.employerService.add(addEmployerRequest));
+
+    @PostMapping(value = "/add")
+    public ResponseEntity<?> add(@Valid @RequestBody AddTemporaryEmployerRequest addTemporaryEmployerRequest) {
+
+        return ResponseEntity.ok(this.temporaryEmployerService.add(addTemporaryEmployerRequest));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -11,5 +11,6 @@ import java.util.List;
 public interface JobDescriptionService {
     List<GetAllJobDescriptionsResponse> getAll();
 
-    public Result add(AddJobDescriptionRequest addJobDescriptionRequest);
+     Result add(AddJobDescriptionRequest addJobDescriptionRequest);
+     Result getById(int id);
 }
