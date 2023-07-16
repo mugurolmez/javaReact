@@ -74,7 +74,7 @@ public class HrmsPersonManager implements HrmsPersonService {
 
     @Override
     public Result verifyEmployer(AddEmployerVerifyRequest addEmployerVerifyRequest) {
-
+        //iş kuralları yazılacak daha once onaylanmıs vs...
         TemporaryEmployer temporaryEmployer= temporaryEmployerDao.findByTemporaryEmployerId(addEmployerVerifyRequest.getTemporaryEmployerId());
 
         Employer employer = this.modelMapperService.forRequest().map(temporaryEmployer, Employer.class);

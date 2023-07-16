@@ -32,9 +32,6 @@ public class JobSeeker{
     private User user;
 
 
-    @OneToMany(mappedBy = "jobSeeker")//diğer tabloda tanımladıgımız jobseeker bağlan bağlantı buradan olacak
-    private List<JobAdvertisement> jobAdvertisements;//bağlanılacak class ismi jobadvertisements diğer tabloda birden fazla olabilir
-
 
     // Diğer özellikler ve ilişkiler
 }

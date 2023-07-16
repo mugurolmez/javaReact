@@ -1,8 +1,10 @@
 package kodlama.io.hrms.business.abstracts;
 
 import kodlama.io.hrms.business.dtos.requests.AddEmployerRequest;
+import kodlama.io.hrms.business.dtos.requests.DeactiveJobAdvertisementRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllEmployersResponse;
 import kodlama.io.hrms.core.utilities.results.Result;
+import kodlama.io.hrms.entities.Employer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,4 +12,6 @@ import java.util.List;
 public interface EmployerService {
     Result add(AddEmployerRequest addEmployerRequest);
     List<GetAllEmployersResponse> getAll();
+
+    Result deactivateJobAdvetisement(DeactiveJobAdvertisementRequest deactiveJobAdvertisementRequest);
 }

@@ -1,11 +1,11 @@
 package kodlama.io.hrms.api.controllers;
 
 import kodlama.io.hrms.business.abstracts.EmployerService;
+import kodlama.io.hrms.business.dtos.requests.DeactiveJobAdvertisementRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllEmployersResponse;
+import kodlama.io.hrms.core.utilities.results.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
@@ -23,5 +23,10 @@ public class EmployerControllers {
     public List<GetAllEmployersResponse> getAll(){
 
         return this.employerService.getAll();
+    }
+
+    @PutMapping("/deactivateJobAdvetisement")
+    Result deactivateJobAdvetisement(@RequestBody DeactiveJobAdvertisementRequest deactiveJobAdvertisementRequest) {
+        return employerService.deactivateJobAdvetisement(deactiveJobAdvertisementRequest);
     }
 }

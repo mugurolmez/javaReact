@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "job_advertisement")
+@Table(name = "job_advertisements")
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobAdvertisement {
@@ -17,8 +17,7 @@ public class JobAdvertisement {
     @Column(name = "job_advertisement_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int jobAdvertisement_id;
-    @Column(name = "employer_id")
-    private int employerId;
+
     @Column(name = "job_description_features")
     private String jobDescriptionFeatures;
     @Column(name = "min_salary")
@@ -27,14 +26,25 @@ public class JobAdvertisement {
     private double maxSalary;
     @Column(name = "number_of_position")
     private int numberOfPositions;
+
+    @Column(name = "release_date")
+    private LocalDate releaseDate;
     @Column(name = "application_dead_line")
     private LocalDate applicationDeadline;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name="is_active")
+    private boolean isActive;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employer_id")
+    private Employer employer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_description_id")
     private JobDescription jobDescription;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_seeker_id")//bu classda veri tabanında job_seeker_id olustur
-    private JobSeeker jobSeeker;//jobseeker uzerınden baglan bu tabloda bırden fazla kere gecebılir diğer tabloda 1 tane olacak
-}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
+
+   }
