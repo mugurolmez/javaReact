@@ -10,13 +10,13 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="job_seekers")
+@Table(name = "job_seekers")
 @AllArgsConstructor
 @NoArgsConstructor
 //@PrimaryKeyJoinColumn(name="person_id")
 //@EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class JobSeeker{
+public class JobSeeker {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,8 @@ public class JobSeeker{
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "jobSeeker")
+    private List<Cv> cvs;
 
 
     // Diğer özellikler ve ilişkiler

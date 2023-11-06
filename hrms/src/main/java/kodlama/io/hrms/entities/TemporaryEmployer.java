@@ -21,6 +21,7 @@ public class TemporaryEmployer {
     private int temporaryEmployerId;
 
     @Email
+    @Column(name = "email")
     private String email;
 
     @NotBlank

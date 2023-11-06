@@ -3,7 +3,6 @@ package kodlama.io.hrms.api.controllers;
 import jakarta.validation.Valid;
 import kodlama.io.hrms.business.abstracts.CityService;
 import kodlama.io.hrms.business.dtos.requests.AddCityRequest;
-import kodlama.io.hrms.business.dtos.requests.AddHrmsPersonRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/Cities")
-public class CityController {
+public class CityControllers {
 
     private CityService cityService;
 
     @Autowired
-    public CityController(CityService cityService) {
+    public CityControllers(CityService cityService) {
         this.cityService = cityService;
     }
 
