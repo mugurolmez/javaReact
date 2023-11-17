@@ -5,6 +5,7 @@ import kodlama.io.hrms.business.abstracts.SchoolService;
 import kodlama.io.hrms.business.dtos.requests.AddSchoolRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllSchoolResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
+import kodlama.io.hrms.core.utilities.results.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,12 +33,23 @@ public class SchoolControllers {
         return ResponseEntity.ok(this.schoolService.add(addSchoolRequest));
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public List<GetAllSchoolResponse> getAll(){
         return this.schoolService.getAll();
 
 
     }
+    @GetMapping("/findAllByOrderByYearOfGraduationDesc")
+    public List<GetAllSchoolResponse> findAllByOrderByYearOfGraduationDesc(){
+        return this.schoolService.findAllByOrderByYearOfGraduationDesc();
+
+    }
+
+    @GetMapping("/{id}")//{} değişkenden gelecek değer
+    public  List<GetAllSchoolResponse> findAllByJobSeekerId(int jobSeekerId){
+        return schoolService.findAllByJobSeekerId(jobSeekerId);
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

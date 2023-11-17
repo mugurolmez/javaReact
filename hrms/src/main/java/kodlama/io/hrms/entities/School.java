@@ -22,13 +22,10 @@ public class School {
     @Column(name = "id")
     private int id;
 
-    @NotNull(message = "Okul Adı Boş Olamaz")
-    @NotBlank(message = "Okul Adı Boş Olamaz")
+
     @Column(name = "school_name")
     private String schoolName;
 
-    @NotNull(message = "Bölüm Adı Boş Olamaz")
-    @NotBlank(message = "Bölüm Adı Boş Olamaz")
     @Column(name = "department")
     private String department;
 
