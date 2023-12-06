@@ -27,8 +27,8 @@ public class EmployerControllers {
         return this.employerService.getAll();
     }
 
-    @PutMapping("/deactivateJobAdvetisement")
-    Result deactivateJobAdvetisement(@RequestBody DeactiveJobAdvertisementRequest deactiveJobAdvertisementRequest) {
-        return employerService.deactivateJobAdvetisement(deactiveJobAdvertisementRequest);
+    @PutMapping("/deactivateJobAdvertisement")
+    Result deactivateJobAdvertisement(@RequestBody DeactiveJobAdvertisementRequest deactiveJobAdvertisementRequest) {
+        return employerService.deactivateJobAdvertisement(deactiveJobAdvertisementRequest);
     }
 }

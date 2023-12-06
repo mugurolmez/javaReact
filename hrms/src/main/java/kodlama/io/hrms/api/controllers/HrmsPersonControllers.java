@@ -20,7 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/hrmsPersons")
-@EnableJpaRepositories
+
 public class HrmsPersonControllers {
     @Autowired
     private HrmsPersonService hrmsPersonService;

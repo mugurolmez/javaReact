@@ -10,7 +10,6 @@ import kodlama.io.hrms.dataAcces.abstracts.JobSeekerDao;
 import kodlama.io.hrms.dataAcces.abstracts.SchoolDao;
 import kodlama.io.hrms.entities.JobSeeker;
 import kodlama.io.hrms.entities.School;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +39,6 @@ public class SchoolManager implements SchoolService {
     @Override
     public Result add(AddSchoolRequest addSchoolRequest) {
 
-        System.out.println(addSchoolRequest.getJobSeekerId());
 
         Optional<JobSeeker> optionalJobSeeker = this.jobSeekerDao.findById(addSchoolRequest.getJobSeekerId());
         if (optionalJobSeeker.isEmpty()) {

@@ -1,17 +1,11 @@
 package kodlama.io.hrms.core.utilities.mappers;
 
-import kodlama.io.hrms.business.dtos.requests.AddSchoolRequest;
-import kodlama.io.hrms.entities.School;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
+
 @AllArgsConstructor
 public class ModelMapperManager implements ModelMapperService {
     private ModelMapper modelMapper;

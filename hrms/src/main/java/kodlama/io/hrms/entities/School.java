@@ -30,10 +30,11 @@ public class School {
 
     @Column(name = "year_of_graduation")
     private String schoolYearOfGraduation;
-
+//gfg
     @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     @JoinColumn(name = "job_seeker_id")
     private JobSeeker jobSeeker ;
+
 
 
 

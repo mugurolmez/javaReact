@@ -44,7 +44,7 @@ public class EmployerManager implements EmployerService {
     }
 
     @Override
-    public Result deactivateJobAdvetisement(@RequestBody() DeactiveJobAdvertisementRequest deactiveJobAdvertisementRequest) {
+    public Result deactivateJobAdvertisement(@RequestBody() DeactiveJobAdvertisementRequest deactiveJobAdvertisementRequest) {
         Optional<Employer> employerOptional = employerDao.findById(deactiveJobAdvertisementRequest.getEmployerId());
         Optional<JobAdvertisement> jobAdvertisementOptional = jobAdvertisementDao.findById(deactiveJobAdvertisementRequest.getJobAdvertisementId());
         //opsiyonel verileri kontrol etmek ıcın değişkene atadım

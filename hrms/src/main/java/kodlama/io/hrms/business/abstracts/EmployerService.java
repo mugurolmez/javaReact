@@ -14,5 +14,5 @@ public interface EmployerService {
 
     List<GetAllEmployersResponse> getAll();
 
-    Result deactivateJobAdvetisement(DeactiveJobAdvertisementRequest deactiveJobAdvertisementRequest);
+    Result deactivateJobAdvertisement(DeactiveJobAdvertisementRequest deactiveJobAdvertisementRequest);
 }
