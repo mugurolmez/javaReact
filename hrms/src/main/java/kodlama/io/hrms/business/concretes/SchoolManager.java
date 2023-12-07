@@ -45,8 +45,6 @@ public class SchoolManager implements SchoolService {
 
             return new ErrorResult("Jobseeker Bulunamadı");
         }
-
-
         JobSeeker jobSeeker = optionalJobSeeker.get();
 
         School school = this.modelMapperService.forRequest().map(addSchoolRequest, School.class);
@@ -89,7 +87,7 @@ public class SchoolManager implements SchoolService {
         //Sıralama
         List<School> sortedSchools = schools.stream()
                 .sorted(Comparator.comparing(School::getSchoolYearOfGraduation, Comparator.nullsLast(Comparator.reverseOrder())))
-                .collect(Collectors.toList());
+                .toList();
 
         //Dönüştürme
         List<GetAllSchoolResponse> schoolResponses = sortedSchools.stream()

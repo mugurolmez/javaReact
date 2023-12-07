@@ -1,11 +1,14 @@
 package kodlama.io.hrms.api.controllers;
 
 import jakarta.validation.Valid;
-import kodlama.io.hrms.business.abstracts.JobSeekerService;
-import kodlama.io.hrms.business.abstracts.LanguageService;
-import kodlama.io.hrms.business.dtos.requests.AddLanguageRequest;
+import kodlama.io.hrms.business.abstracts.GithubAddressService;
+import kodlama.io.hrms.business.abstracts.SchoolService;
+import kodlama.io.hrms.business.dtos.requests.AddGithubAddressRequest;
+import kodlama.io.hrms.business.dtos.requests.AddSchoolRequest;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
+import kodlama.io.hrms.dataAcces.abstracts.GithubAddressDao;
+import kodlama.io.hrms.entities.GithubAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,25 +20,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/languages")
-public class LanguageControllers {
-
-    private LanguageService languageService;
+@RequestMapping("/api/githubAddress")
+public class GithubAddressControllers {
 
     @Autowired
-    public LanguageControllers(LanguageService languageService, JobSeekerService jobSeekerService) {
-        this.languageService = languageService;
+    private GithubAddressService githubAddressService;
+
+    public GithubAddressControllers(GithubAddressService githubAddressService) {
+        this.githubAddressService = githubAddressService;
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity<?> add(@Valid @RequestBody AddLanguageRequest addLanguageRequest) {
+    public ResponseEntity<?> add(@Valid @RequestBody AddGithubAddressRequest addGithubAddressRequest) {
 
-        return ResponseEntity.ok(this.languageService.add(addLanguageRequest));
+        return ResponseEntity.ok(this.githubAddressService.add(addGithubAddressRequest));
     }
 
     @GetMapping("/{jobSeekerId}")//{} değişkenden gelecek değer
-    public DataResult findAllByJobSeekerJobSeekerId(@PathVariable int jobSeekerId) {
-        return languageService.findAllByJobSeekerJobSeekerId(jobSeekerId);
+    public DataResult<GithubAddress> findAllByJobSeekerJobSeekerId(@PathVariable int jobSeekerId) {
+        return githubAddressService.findAllByJobSeekerJobSeekerId(jobSeekerId);
     }
 
 

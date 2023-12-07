@@ -43,6 +43,11 @@ public class JobSeeker {
     @OneToOne(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Image image;
 
+    @OneToOne(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private GithubAddress githubAddress;
+
+
+
 
     // Diğer özellikler ve ilişkiler
 }

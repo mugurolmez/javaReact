@@ -3,18 +3,15 @@ package kodlama.io.hrms.business.concretes;
 import kodlama.io.hrms.business.abstracts.LanguageService;
 import kodlama.io.hrms.business.dtos.requests.AddLanguageRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllLanguagesResponse;
-import kodlama.io.hrms.business.dtos.responses.GetAllSchoolResponse;
 import kodlama.io.hrms.core.utilities.mappers.ModelMapperService;
 import kodlama.io.hrms.core.utilities.results.*;
 import kodlama.io.hrms.dataAcces.abstracts.JobSeekerDao;
 import kodlama.io.hrms.dataAcces.abstracts.LanguageDao;
 import kodlama.io.hrms.entities.JobSeeker;
 import kodlama.io.hrms.entities.Language;
-import kodlama.io.hrms.entities.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

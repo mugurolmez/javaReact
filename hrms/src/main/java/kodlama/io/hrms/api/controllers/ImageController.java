@@ -3,6 +3,7 @@ package kodlama.io.hrms.api.controllers;
 import jakarta.transaction.Transactional;
 import kodlama.io.hrms.business.abstracts.CloudinaryService;
 import kodlama.io.hrms.business.abstracts.ImageService;
+import kodlama.io.hrms.business.dtos.responses.GetAllImagesResponse;
 import kodlama.io.hrms.dataAcces.abstracts.ImageRepository;
 import kodlama.io.hrms.dataAcces.abstracts.JobSeekerDao;
 import kodlama.io.hrms.entities.Image;
@@ -42,11 +43,12 @@ public class ImageController {
         this.imageRepository = imageRepository;
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Image>> list() {
-        List<Image> list = this.imageService.list();
-        return new ResponseEntity<>(list, HttpStatus.OK);
+    @GetMapping("/getAllImagesResponse")
+    List<GetAllImagesResponse> getAll(){
+       return this.imageService.getAll();
+
     }
+
 
     //postederken yaparken postmande http://localhost:8080/image/upload
     //post-body-form-data secip key=multipartFile file seçip resmin kısa yolu seçiliyor.
