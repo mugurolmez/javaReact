@@ -13,8 +13,6 @@ import java.util.List;
 @Table(name = "job_seekers")
 @AllArgsConstructor
 @NoArgsConstructor
-//@PrimaryKeyJoinColumn(name="person_id")
-//@EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class JobSeeker {
 
@@ -46,7 +44,8 @@ public class JobSeeker {
     @OneToOne(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private GithubAddress githubAddress;
 
-
+    @OneToOne(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private CoverLetter coverLetter;
 
 
     // Diğer özellikler ve ilişkiler

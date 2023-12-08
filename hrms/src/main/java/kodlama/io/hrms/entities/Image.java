@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name="images")
 @Data
 @NoArgsConstructor
 public class Image {
