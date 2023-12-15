@@ -6,6 +6,7 @@ import kodlama.io.hrms.business.dtos.requests.AddEmployerVerifyRequest;
 import kodlama.io.hrms.business.dtos.requests.AddHrmsPersonRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllHrmsPersonResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
@@ -20,15 +21,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/hrmsPersons")
-
+@AllArgsConstructor
 public class HrmsPersonControllers {
     @Autowired
     private HrmsPersonService hrmsPersonService;
 
-    public HrmsPersonControllers(HrmsPersonService hrmsPersonService) {
-        this.hrmsPersonService = hrmsPersonService;
-
-    }
 
     @GetMapping("/get-all")
     public List<GetAllHrmsPersonResponse> getall() {

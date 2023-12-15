@@ -1,7 +1,9 @@
-package kodlama.io.hrms.entities;
+package kodlama.io.hrms.entities.userEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import kodlama.io.hrms.entities.userEntities.Person;
+import kodlama.io.hrms.entities.userEntities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

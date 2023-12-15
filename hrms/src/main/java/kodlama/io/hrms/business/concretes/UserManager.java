@@ -10,8 +10,9 @@ import kodlama.io.hrms.core.utilities.results.ErrorResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAcces.abstracts.UserDao;
-import kodlama.io.hrms.entities.User;
+import kodlama.io.hrms.entities.userEntities.User;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +22,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 
 public class UserManager implements UserService {
+    @Autowired
     private ModelMapperService modelMapperService;
     private UserDao userDao;
-    private EmailService emailService;
     private UserBusinessRules userBussinessRules;
 
     @Override

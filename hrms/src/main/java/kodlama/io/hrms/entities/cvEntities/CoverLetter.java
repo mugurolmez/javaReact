@@ -1,25 +1,23 @@
-package kodlama.io.hrms.entities;
+package kodlama.io.hrms.entities.cvEntities;
 
 import jakarta.persistence.*;
+import kodlama.io.hrms.entities.userEntities.JobSeeker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "languages")
+@Table(name = "cover_letter")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Language {
-
+public class CoverLetter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "language_id")
-    private int languageId;
-    @Column(name = "language_name")
-    private String languageName;
-    @Column(name = "language_level")
-    private String languageLevel;
+    @Column(name = "id")
+    private int id;
+    @Column(name = "cover_letter")
+    private String CoverLetter;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "job_seeker_id")

@@ -2,14 +2,14 @@ package kodlama.io.hrms.business.concretes;
 
 import kodlama.io.hrms.business.abstracts.SchoolService;
 import kodlama.io.hrms.business.dtos.requests.AddSchoolRequest;
-import kodlama.io.hrms.business.dtos.responses.GetAllSchoolResponse;
+import kodlama.io.hrms.business.dtos.responses.cvitems.GetAllCvSchoolResponse;
 import kodlama.io.hrms.core.utilities.mappers.ModelMapperService;
 import kodlama.io.hrms.core.utilities.results.*;
-import kodlama.io.hrms.dataAcces.abstracts.CvDao;
 import kodlama.io.hrms.dataAcces.abstracts.JobSeekerDao;
 import kodlama.io.hrms.dataAcces.abstracts.SchoolDao;
-import kodlama.io.hrms.entities.JobSeeker;
-import kodlama.io.hrms.entities.School;
+import kodlama.io.hrms.entities.cvEntities.School;
+import kodlama.io.hrms.entities.userEntities.JobSeeker;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,27 +19,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-
+@AllArgsConstructor
 public class SchoolManager implements SchoolService {
-
-
-
+    @Autowired
     private SchoolDao schoolDao;
     private ModelMapperService modelMapperService;
     private JobSeekerDao jobSeekerDao;
-    private CvDao cvDao;
-    @Autowired
-    public SchoolManager(SchoolDao schoolDao, ModelMapperService modelMapperService, JobSeekerDao jobSeekerDao, CvDao cvDao) {
-        this.schoolDao = schoolDao;
-        this.modelMapperService = modelMapperService;
-        this.jobSeekerDao = jobSeekerDao;
-        this.cvDao = cvDao;
-    }
 
     @Override
     public Result add(AddSchoolRequest addSchoolRequest) {
-
-
         Optional<JobSeeker> optionalJobSeeker = this.jobSeekerDao.findById(addSchoolRequest.getJobSeekerId());
         if (optionalJobSeeker.isEmpty()) {
 
@@ -57,26 +45,8 @@ public class SchoolManager implements SchoolService {
 
     }
 
-    @Override
-    public List<GetAllSchoolResponse> getAll() {
-
-        List<School> schools = schoolDao.findAll();
-
-
-        List<GetAllSchoolResponse> schoolResponses = schools.stream()
-                .map(school -> this.modelMapperService.forResponse().map(school, GetAllSchoolResponse.class))
-                .collect(Collectors.toList());
-
-
-        return schoolResponses;
-    }
-
-
-    public DataResult findAllByJobSeekerJobSeekerId(int jobSeekerId) {
-
-
-        List<School> schools = schoolDao.findAllByJobSeekerJobSeekerId(jobSeekerId);
-
+    public DataResult<List<GetAllCvSchoolResponse>> findAllByJobSeeker_JobSeekerId(int jobSeekerId) {
+        List<School> schools = this.schoolDao.findAllByJobSeeker_JobSeekerId(jobSeekerId);
         // YearOfGraduation boşsa "devam ediyor" olarak değiştirme
         schools.forEach(school -> {
             if (school.getSchoolYearOfGraduation() == null || school.getSchoolYearOfGraduation().isEmpty()) {
@@ -90,12 +60,35 @@ public class SchoolManager implements SchoolService {
                 .toList();
 
         //Dönüştürme
-        List<GetAllSchoolResponse> schoolResponses = sortedSchools.stream()
+        List<GetAllCvSchoolResponse> schoolResponses = sortedSchools.stream()
                 .map(school -> this.modelMapperService.forResponse()
-                        .map(school, GetAllSchoolResponse.class)).collect(Collectors.toList());
+                        .map(school, GetAllCvSchoolResponse.class)).collect(Collectors.toList());
+        return new SuccessDataResult<>(schoolResponses, "Okullar Listelendi");
+    }
 
 
-        return new SuccessDataResult(schoolResponses,"Okullar Listelendi");
+    @Override
+    public List<GetAllCvSchoolResponse> getAllCvSchoolResponses(int jobSeekerId) {
+        List<School> schools = this.schoolDao.findAllByJobSeeker_JobSeekerId(jobSeekerId);
+
+        schools.forEach(school -> {
+            if (school.getSchoolYearOfGraduation() == null || school.getSchoolYearOfGraduation().isEmpty()) {
+                school.setSchoolYearOfGraduation("Devam Ediyor");
+            }
+        });
+
+        //Sıralama
+        List<School> sortedSchools = schools.stream()
+                .sorted(Comparator.comparing(School::getSchoolYearOfGraduation, Comparator.nullsLast(Comparator.reverseOrder())))
+                .toList();
+
+        //Dönüştürme
+        List<GetAllCvSchoolResponse> schoolResponses = sortedSchools.stream()
+                .map(school -> this.modelMapperService.forResponse()
+                        .map(school, GetAllCvSchoolResponse.class)).collect(Collectors.toList());
+
+
+        return schoolResponses;
 
     }
 

@@ -1,6 +1,7 @@
 package kodlama.io.hrms.entities;
 
 import jakarta.persistence.*;
+import kodlama.io.hrms.entities.userEntities.Employer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -2,13 +2,12 @@ package kodlama.io.hrms.api.controllers;
 
 import jakarta.validation.Valid;
 import kodlama.io.hrms.business.abstracts.GithubAddressService;
-import kodlama.io.hrms.business.abstracts.SchoolService;
 import kodlama.io.hrms.business.dtos.requests.AddGithubAddressRequest;
-import kodlama.io.hrms.business.dtos.requests.AddSchoolRequest;
+import kodlama.io.hrms.business.dtos.responses.GetGithubAddressResponse;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
-import kodlama.io.hrms.dataAcces.abstracts.GithubAddressDao;
-import kodlama.io.hrms.entities.GithubAddress;
+import kodlama.io.hrms.entities.cvEntities.GithubAddress;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/githubAddress")
+@RequestMapping("/api/github-address")
+@AllArgsConstructor
 public class GithubAddressControllers {
 
     @Autowired
     private GithubAddressService githubAddressService;
-
-    public GithubAddressControllers(GithubAddressService githubAddressService) {
-        this.githubAddressService = githubAddressService;
-    }
 
     @PostMapping(value = "/add")
     public ResponseEntity<?> add(@Valid @RequestBody AddGithubAddressRequest addGithubAddressRequest) {
@@ -37,8 +33,8 @@ public class GithubAddressControllers {
     }
 
     @GetMapping("/{jobSeekerId}")//{} değişkenden gelecek değer
-    public DataResult<GithubAddress> findAllByJobSeekerJobSeekerId(@PathVariable int jobSeekerId) {
-        return githubAddressService.findAllByJobSeekerJobSeekerId(jobSeekerId);
+    public DataResult<GetGithubAddressResponse> findByJobSeekerJobSeekerId(@PathVariable int jobSeekerId) {
+        return this.githubAddressService.findByJobSeekerJobSeekerId(jobSeekerId);
     }
 
 

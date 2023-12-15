@@ -1,11 +1,10 @@
-package kodlama.io.hrms.entities;
+package kodlama.io.hrms.entities.cvEntities;
 
 import jakarta.persistence.*;
+import kodlama.io.hrms.entities.userEntities.JobSeeker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @Entity

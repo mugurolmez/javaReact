@@ -6,6 +6,7 @@ import kodlama.io.hrms.business.abstracts.HrmsPersonService;
 import kodlama.io.hrms.business.dtos.requests.AddEmployerVerifyRequest;
 import kodlama.io.hrms.business.dtos.requests.AddHrmsPersonRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllHrmsPersonResponse;
+
 import kodlama.io.hrms.business.rules.concretes.HrmsPersonBusinessRules;
 import kodlama.io.hrms.core.utilities.mappers.ModelMapperService;
 import kodlama.io.hrms.core.utilities.results.ErrorResult;
@@ -13,7 +14,12 @@ import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAcces.abstracts.*;
 import kodlama.io.hrms.entities.*;
+import kodlama.io.hrms.entities.userEntities.Employer;
+import kodlama.io.hrms.entities.userEntities.HrmsPerson;
+import kodlama.io.hrms.entities.userEntities.Person;
+import kodlama.io.hrms.entities.userEntities.User;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +28,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class HrmsPersonManager implements HrmsPersonService {
+    @Autowired
     private HrmsPersonDao hrmsPersonDao;
     private EmailService emailService;
     private ModelMapperService modelMapperService;
@@ -29,7 +36,6 @@ public class HrmsPersonManager implements HrmsPersonService {
     private TemporaryEmployerDao temporaryEmployerDao;
     private EmployerDao employerDao;
     private UserDao userDao;
-    private EmployerVerifyDao employerVerifyDao;
     private EmployerVerifyService employerVerifyService;
 
 

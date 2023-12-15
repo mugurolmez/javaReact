@@ -7,9 +7,9 @@ import kodlama.io.hrms.core.utilities.mappers.ModelMapperService;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAcces.abstracts.JobAdvertisementDao;
-import kodlama.io.hrms.entities.Employer;
 import kodlama.io.hrms.entities.JobAdvertisement;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class JobAdvertisementManager implements JobAdvertisementService {
+    @Autowired
     private ModelMapperService modelMapperService;
     private JobAdvertisementDao jobAdvertisementDao;
-    private Employer employer;
 
     @Override
     public Result add(AddJobAdvertisementRequest addJobAdvertisementRequest) {

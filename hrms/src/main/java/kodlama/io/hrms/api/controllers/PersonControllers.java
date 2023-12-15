@@ -3,7 +3,8 @@ package kodlama.io.hrms.api.controllers;
 import jakarta.validation.Valid;
 import kodlama.io.hrms.business.abstracts.PersonService;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
-import kodlama.io.hrms.entities.Person;
+import kodlama.io.hrms.entities.userEntities.Person;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +18,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/persons")
+@AllArgsConstructor
 public class PersonControllers {
     @Autowired
     private PersonService personService;
-
-    public PersonControllers(PersonService personService) {
-        this.personService = personService;
-    }
-
 
     @GetMapping("/getall")
     public List<Person> getall() {

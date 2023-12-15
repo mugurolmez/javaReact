@@ -6,6 +6,7 @@ import kodlama.io.hrms.business.dtos.requests.AddJobDescriptionRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllJobDescriptionsResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +20,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/jobDescriptions")
-
+@AllArgsConstructor
 
 public class JobDescriptionControllers {
     @Autowired
     private JobDescriptionService jobDescriptionService;
-
-    public JobDescriptionControllers(JobDescriptionService jobDescriptionService) {
-        this.jobDescriptionService = jobDescriptionService;
-    }
 
     @GetMapping("/getall")
     public List<GetAllJobDescriptionsResponse> getall() {

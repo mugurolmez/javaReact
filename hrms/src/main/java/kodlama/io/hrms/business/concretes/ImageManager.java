@@ -8,10 +8,11 @@ import kodlama.io.hrms.core.utilities.mappers.ModelMapperService;
 import kodlama.io.hrms.core.utilities.results.ErrorResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
-import kodlama.io.hrms.dataAcces.abstracts.ImageRepository;
+import kodlama.io.hrms.dataAcces.abstracts.ImageDao;
 import kodlama.io.hrms.dataAcces.abstracts.JobSeekerDao;
-import kodlama.io.hrms.entities.Image;
-import kodlama.io.hrms.entities.JobSeeker;
+import kodlama.io.hrms.entities.cvEntities.Image;
+import kodlama.io.hrms.entities.userEntities.JobSeeker;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,25 +27,17 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-
+@AllArgsConstructor
 public class ImageManager implements ImageService {
     @Autowired
-    ImageRepository imageRepository;
+    ImageDao imageDao;
     CloudinaryService cloudinaryService;
     JobSeekerDao jobSeekerDao;
     ModelMapperService modelMapperService;
 
-    public ImageManager(ImageRepository imageRepository, CloudinaryService cloudinaryService, JobSeekerDao jobSeekerDao, ModelMapperService modelMapperService) {
-        this.imageRepository = imageRepository;
-        this.cloudinaryService = cloudinaryService;
-        this.jobSeekerDao = jobSeekerDao;
-        this.modelMapperService = modelMapperService;
-    }
-
-
     public List<GetAllImagesResponse> getAll() {
 
-        List<Image> images = imageRepository.findAll();
+        List<Image> images = imageDao.findAll();
 
         List<GetAllImagesResponse> imagesResponses = images.stream()
                 .map(image -> this.modelMapperService.forResponse()
@@ -55,7 +48,7 @@ public class ImageManager implements ImageService {
     }
 
     public Optional<Image> getOne(int id) {
-        return this.imageRepository.findById(id);
+        return this.imageDao.findById(id);
     }
 
     public Result add(int jobSeekerId, MultipartFile multipartFile) throws IOException {
@@ -72,7 +65,7 @@ public class ImageManager implements ImageService {
         if (optionalJobSeeker.isEmpty()) {
             return new ErrorResult("JobSeeker geçerli değil!");
         }
-        if (imageRepository.existsByJobSeeker_JobSeekerId(jobSeekerId)) {
+        if (imageDao.existsByJobSeeker_JobSeekerId(jobSeekerId)) {
             return new ErrorResult("Kayıtlı resim var");
         }
         JobSeeker jobSeeker = optionalJobSeeker.get();
@@ -89,7 +82,7 @@ public class ImageManager implements ImageService {
         );
 
 
-        this.imageRepository.save(image);
+        this.imageDao.save(image);
 
         return new SuccessResult("Kayıt Başarılı");
     }
@@ -97,11 +90,11 @@ public class ImageManager implements ImageService {
     public void delete(int id) {
 
 
-        this.imageRepository.deleteById(id);
+        this.imageDao.deleteById(id);
     }
 
 
     public boolean exists(int id) {
-        return this.imageRepository.existsById(id);
+        return this.imageDao.existsById(id);
     }
 }

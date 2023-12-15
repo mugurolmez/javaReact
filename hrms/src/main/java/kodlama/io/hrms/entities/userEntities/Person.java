@@ -1,4 +1,4 @@
-package kodlama.io.hrms.entities;
+package kodlama.io.hrms.entities.userEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -8,10 +8,9 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-@Component
+
 @Data
 @Entity
 @Table(name="persons")

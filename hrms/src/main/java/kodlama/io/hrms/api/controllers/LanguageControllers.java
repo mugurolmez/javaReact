@@ -1,11 +1,11 @@
 package kodlama.io.hrms.api.controllers;
 
 import jakarta.validation.Valid;
-import kodlama.io.hrms.business.abstracts.JobSeekerService;
 import kodlama.io.hrms.business.abstracts.LanguageService;
 import kodlama.io.hrms.business.dtos.requests.AddLanguageRequest;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/languages")
+@AllArgsConstructor
 public class LanguageControllers {
-
-    private LanguageService languageService;
-
     @Autowired
-    public LanguageControllers(LanguageService languageService, JobSeekerService jobSeekerService) {
-        this.languageService = languageService;
-    }
+    private LanguageService languageService;
 
     @PostMapping(value = "/add")
     public ResponseEntity<?> add(@Valid @RequestBody AddLanguageRequest addLanguageRequest) {

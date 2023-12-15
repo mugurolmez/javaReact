@@ -5,6 +5,7 @@ import kodlama.io.hrms.business.abstracts.JobSeekerService;
 import kodlama.io.hrms.business.dtos.requests.AddJobSeekerRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllJobSeekersResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
@@ -19,16 +20,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/jobSeekers")
-@EnableJpaRepositories
+@AllArgsConstructor
 
 public class JobSeekerControllers {
-
-    private JobSeekerService jobSeekerService;
     @Autowired
-    public JobSeekerControllers(JobSeekerService jobSeekerService) {
-        this.jobSeekerService = jobSeekerService;
-
-    }
+    private JobSeekerService jobSeekerService;
 
     @GetMapping("/getall")
     public List<GetAllJobSeekersResponse> getall() {

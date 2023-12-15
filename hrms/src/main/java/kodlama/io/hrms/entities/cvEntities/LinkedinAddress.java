@@ -1,23 +1,23 @@
-package kodlama.io.hrms.entities;
+package kodlama.io.hrms.entities.cvEntities;
 
 import jakarta.persistence.*;
+import kodlama.io.hrms.entities.userEntities.JobSeeker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="github_address")
+@Table(name="linkedin_address")
 @AllArgsConstructor
 @NoArgsConstructor
-public class GithubAddress {
-
+public class LinkedinAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "github_id")
-    private int githubId;
-    @Column(name = "address")
-    private String Address;
+    @Column(name = "linkedşn_id")
+    private int linkedinId;
+    @Column(name = "linkedinAddress")
+    private String linkedinAddress;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "job_seeker_id")

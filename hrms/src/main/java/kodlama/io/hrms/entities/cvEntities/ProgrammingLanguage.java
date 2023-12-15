@@ -1,6 +1,7 @@
-package kodlama.io.hrms.entities;
+package kodlama.io.hrms.entities.cvEntities;
 
 import jakarta.persistence.*;
+import kodlama.io.hrms.entities.userEntities.JobSeeker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,8 @@ public class ProgrammingLanguage {
     @Column(name = "programming_language_id")
     private int programmingLanguageId;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "programming_language_name")
+    private String programmingLanguageName;
 
 
     @OneToMany(mappedBy = "programmingLanguage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

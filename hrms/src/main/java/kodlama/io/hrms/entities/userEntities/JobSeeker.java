@@ -1,7 +1,8 @@
-package kodlama.io.hrms.entities;
+package kodlama.io.hrms.entities.userEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import kodlama.io.hrms.entities.cvEntities.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,9 +22,6 @@ public class JobSeeker {
     @Column(name = "job_seeker_id")
     private int jobSeekerId;
 
-    @Column(name = "name")
-    private String name;
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
     private Person person;
@@ -36,7 +34,12 @@ public class JobSeeker {
     private List<School> schools;
 
     @OneToMany(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<WorkExperience> workExperiences;
+    @OneToMany(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Language> languages;
+
+    @OneToMany(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProgrammingLanguage> programmingLanguages;
 
     @OneToOne(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Image image;
@@ -45,8 +48,9 @@ public class JobSeeker {
     private GithubAddress githubAddress;
 
     @OneToOne(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private LinkedinAddress linkedinAddress;
+
+    @OneToOne(mappedBy = "jobSeeker", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private CoverLetter coverLetter;
 
-
-    // Diğer özellikler ve ilişkiler
 }

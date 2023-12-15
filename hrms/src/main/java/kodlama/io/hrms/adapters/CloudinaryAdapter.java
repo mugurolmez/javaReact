@@ -4,6 +4,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import jakarta.transaction.Transactional;
 import kodlama.io.hrms.business.abstracts.CloudinaryService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,14 +18,11 @@ import java.util.Objects;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class CloudinaryAdapter implements CloudinaryService {
-
+    @Autowired
     private final Cloudinary cloudinary;
 
-    @Autowired
-    public CloudinaryAdapter(Cloudinary cloudinary) {
-        this.cloudinary = cloudinary;
-    }
 
     public Map<?, ?> upload(MultipartFile multipartFile) throws IOException {
 

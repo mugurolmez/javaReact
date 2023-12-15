@@ -1,5 +1,6 @@
 package kodlama.io.hrms.business.concretes;
 
+import jakarta.transaction.Transactional;
 import kodlama.io.hrms.business.abstracts.EmailService;
 import kodlama.io.hrms.business.abstracts.JobSeekerService;
 import kodlama.io.hrms.business.dtos.requests.AddJobSeekerRequest;
@@ -12,20 +13,24 @@ import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAcces.abstracts.CvDao;
 import kodlama.io.hrms.dataAcces.abstracts.JobSeekerDao;
-import kodlama.io.hrms.entities.Cv;
-import kodlama.io.hrms.entities.JobSeeker;
-import kodlama.io.hrms.entities.Person;
-import kodlama.io.hrms.entities.User;
+import kodlama.io.hrms.dataAcces.abstracts.PersonDao;
+import kodlama.io.hrms.dataAcces.abstracts.UserDao;
+import kodlama.io.hrms.entities.cvEntities.Cv;
+import kodlama.io.hrms.entities.userEntities.JobSeeker;
+import kodlama.io.hrms.entities.userEntities.Person;
+import kodlama.io.hrms.entities.userEntities.User;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-
 public class JobSeekerManager implements JobSeekerService {
+    @Autowired
     private JobSeekerDao jobSeekerDao;
     private JobSeekerCheckService jobSeekerCheckService;
     private EmailService emailService;
@@ -59,7 +64,7 @@ public class JobSeekerManager implements JobSeekerService {
 
 
             //job seeker olustururken aynı id sahip cv oluştur
-            Cv cv=new Cv();
+            Cv cv = new Cv();
             cv.setCvId(jobSeeker.getJobSeekerId());
             cv.setJobSeeker(jobSeeker);
             cvDao.save(cv);
@@ -79,6 +84,12 @@ public class JobSeekerManager implements JobSeekerService {
                 .collect(Collectors.toList());
         return jobSeekerResponses;
 
+    }
+
+
+    @Override
+    public void getone(int jobSeekerId) {
+        this.jobSeekerDao.findById(jobSeekerId);
     }
 
 

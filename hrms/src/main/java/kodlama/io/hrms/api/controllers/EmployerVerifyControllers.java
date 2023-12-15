@@ -2,6 +2,7 @@ package kodlama.io.hrms.api.controllers;
 
 import kodlama.io.hrms.business.abstracts.EmployerVerifyService;
 import kodlama.io.hrms.business.dtos.responses.GetAllEmployerVerifiesResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,13 +12,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employerVerifies")
+@AllArgsConstructor
 public class EmployerVerifyControllers {
+    @Autowired
     private EmployerVerifyService employerVerifyService;
 
-    @Autowired
-    public EmployerVerifyControllers(EmployerVerifyService employerVerifyService) {
-        this.employerVerifyService = employerVerifyService;
-    }
+
+
 
 
     @GetMapping("/getall")

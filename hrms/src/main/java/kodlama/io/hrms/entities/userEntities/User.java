@@ -1,4 +1,4 @@
-package kodlama.io.hrms.entities;
+package kodlama.io.hrms.entities.userEntities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

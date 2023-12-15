@@ -1,12 +1,10 @@
-package kodlama.io.hrms.entities;
+package kodlama.io.hrms.entities.cvEntities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
 @Data
 @Entity
 @Table(name = "frameworks")
@@ -17,9 +15,11 @@ public class Framework {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "framework_id")
     private int frameworkId;
+    @Column(name = "job_seeker_id")
+    private int jobSeekerId;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "framework_name")
+    private String frameworkName;
 
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -12,5 +12,6 @@ public interface JobSeekerService {
     Result add(AddJobSeekerRequest addJobSeekerRequest);
 
     List<GetAllJobSeekersResponse> getAll();
+    void getone(int jobSeekerId);
 
 }

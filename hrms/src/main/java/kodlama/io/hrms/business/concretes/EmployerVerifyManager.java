@@ -8,6 +8,7 @@ import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAcces.abstracts.EmployerVerifyDao;
 import kodlama.io.hrms.entities.EmployerVerify;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +16,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-
+@AllArgsConstructor
 public class EmployerVerifyManager implements EmployerVerifyService {
-
+    @Autowired
     private EmployerVerifyDao employerVerifyDao;
     private ModelMapperService modelMapperService;
 
-    @Autowired
-    public EmployerVerifyManager(EmployerVerifyDao employerVerifyDao, ModelMapperService modelMapperService) {
-        this.employerVerifyDao = employerVerifyDao;
-        this.modelMapperService = modelMapperService;
-    }
 
     @Override
     public Result add(AddEmployerVerifyRequest addEmployerVerifyRequest) {

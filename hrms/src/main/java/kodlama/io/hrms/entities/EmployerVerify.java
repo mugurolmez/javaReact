@@ -1,6 +1,7 @@
 package kodlama.io.hrms.entities;
 
 import jakarta.persistence.*;
+import kodlama.io.hrms.entities.userEntities.HrmsPerson;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,6 @@ public class EmployerVerify {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "employer_id")

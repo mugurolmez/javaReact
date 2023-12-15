@@ -13,6 +13,6 @@ import org.springframework.stereotype.Component;
 public class AddGithubAddressRequest {
 
     private int jobSeekerId;
-    private String address;
+    private String githubAddress;
 
 }

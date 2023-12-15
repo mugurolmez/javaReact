@@ -8,15 +8,17 @@ import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAcces.abstracts.CityDao;
 import kodlama.io.hrms.entities.City;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class CityManager implements CityService {
+    @Autowired
     private ModelMapperService modelMapperService;
     private CityDao cityDao;
 
-
+    //iş kuralları eklenecek
     @Override
     public Result add(AddCityRequest addCityRequest) {
         City city = modelMapperService.forRequest().map(addCityRequest, City.class);

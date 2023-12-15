@@ -12,6 +12,7 @@ import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAcces.abstracts.JobDescriptionDao;
 import kodlama.io.hrms.entities.JobDescription;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,20 +22,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@NoArgsConstructor
+@AllArgsConstructor
 public class JobDescriptionManager implements JobDescriptionService {
 
-
+    @Autowired
     private JobDescriptionDao jobDescriptionDao;
     private JobDescriptionRulesService jobDescriptionRulesService;
     private ModelMapperService modelMapperService;
-
-    @Autowired
-    public JobDescriptionManager(JobDescriptionRulesService jobDescriptionRulesService, JobDescriptionDao jobDescriptionDao, ModelMapperService modelMapperService) {
-        this.jobDescriptionDao = jobDescriptionDao;
-        this.modelMapperService = modelMapperService;
-        this.jobDescriptionRulesService = jobDescriptionRulesService;
-    }
 
     @Override
     public List<GetAllJobDescriptionsResponse> getAll() {

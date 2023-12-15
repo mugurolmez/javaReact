@@ -1,61 +1,64 @@
 package kodlama.io.hrms.business.concretes;
 
 import kodlama.io.hrms.business.abstracts.CvService;
-import kodlama.io.hrms.business.dtos.requests.UpdateCvRequest;
-import kodlama.io.hrms.business.dtos.responses.GetAllCvsResponse;
+import kodlama.io.hrms.business.abstracts.FrameworkService;
+import kodlama.io.hrms.business.abstracts.SchoolService;
+import kodlama.io.hrms.business.abstracts.WorkExperienceService;
+import kodlama.io.hrms.business.dtos.responses.cvitems.GetAllCvSchoolResponse;
+import kodlama.io.hrms.business.dtos.responses.cvitems.GetAllProgrammingLanguageAndFrameworksResponse;
+import kodlama.io.hrms.business.dtos.responses.cvitems.GetByJobSeekerIdCvResponse;
 import kodlama.io.hrms.core.utilities.mappers.ModelMapperService;
-import kodlama.io.hrms.core.utilities.results.ErrorResult;
-import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.core.utilities.results.SuccessResult;
-import kodlama.io.hrms.dataAcces.abstracts.CvDao;
+import kodlama.io.hrms.core.utilities.results.DataResult;
+import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
+import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.dataAcces.abstracts.JobSeekerDao;
-import kodlama.io.hrms.dataAcces.abstracts.SchoolDao;
-import kodlama.io.hrms.dataAcces.abstracts.WorkExperienceDao;
-import kodlama.io.hrms.entities.Cv;
-import kodlama.io.hrms.entities.JobSeeker;
-import kodlama.io.hrms.entities.School;
+import kodlama.io.hrms.entities.cvEntities.Cv;
+import kodlama.io.hrms.entities.cvEntities.WorkExperience;
+import kodlama.io.hrms.entities.userEntities.JobSeeker;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
-
+@AllArgsConstructor
 public class CvManager implements CvService {
-    private CvDao cvDao;
+    @Autowired
     private JobSeekerDao jobSeekerDao;
-    private SchoolDao schoolDao;
-    private WorkExperienceDao workExperienceDao;
     private ModelMapperService modelMapperService;
+    private FrameworkService frameworkService;
+    private SchoolService schoolService;
+    private WorkExperienceService workExperienceService;
 
-    public CvManager(CvDao cvDao, SchoolDao schoolDao, WorkExperienceDao workExperienceDao, ModelMapperService modelMapperService, JobSeekerDao jobSeekerDao) {
-        this.cvDao = cvDao;
-        this.schoolDao = schoolDao;
-        this.workExperienceDao = workExperienceDao;
-        this.modelMapperService = modelMapperService;
-        this.jobSeekerDao = jobSeekerDao;
-    }
 
     @Override
-    public List<GetAllCvsResponse> getAll() {
-        List<Cv> cvs = cvDao.findAll();
+    public DataResult<GetByJobSeekerIdCvResponse> getAll(int jobSeekerId) {
 
-        List<GetAllCvsResponse> getAllCvsResponses = cvs.stream()
-                .map(cv -> this.modelMapperService.forResponse()
-                        .map(cv, GetAllCvsResponse.class))
-                .collect(Collectors.toList());
-        return getAllCvsResponses;
+        Optional<JobSeeker> optionalJobSeeker = this.jobSeekerDao.findById(jobSeekerId);
+        if (optionalJobSeeker.isEmpty()) {
+            return new ErrorDataResult<>("iş arayan Bulunamadı");
+        }
+        JobSeeker jobSeeker = optionalJobSeeker.get();
 
-    }
+        List<WorkExperience> workExperiences = this.workExperienceService.GetAllCvWorkExperiences(jobSeekerId);
 
-    @Override
-    public Result update(UpdateCvRequest updateCvRequest) {
 
-;
-        return null;
+        List<GetAllCvSchoolResponse> schools = this.schoolService.getAllCvSchoolResponses(jobSeekerId);
+        List<GetAllProgrammingLanguageAndFrameworksResponse> frameworksResponse =
+                this.frameworkService.findAllByLanguage_id(jobSeekerId).getData();
 
+        Cv cv = new Cv();
+        cv.setJobSeeker(jobSeeker);
+        jobSeeker.setWorkExperiences(workExperiences);
+
+
+        GetByJobSeekerIdCvResponse response = this.modelMapperService.forResponse().map(cv, GetByJobSeekerIdCvResponse.class);
+        response.setSchools(schools);
+        response.setProgrammingLanguages(frameworksResponse);
+
+
+        return new SuccessDataResult<>(response, "cv listelendi");
     }
 }

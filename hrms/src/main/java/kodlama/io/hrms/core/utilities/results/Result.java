@@ -1,5 +1,8 @@
 package kodlama.io.hrms.core.utilities.results;
 
+import lombok.Getter;
+
+@Getter
 public class Result {
     private boolean success;
     private String message;
@@ -14,11 +17,4 @@ public class Result {
         this.message = message;
     }
 
-    public boolean isSuccess() {
-        return this.success;
-    }
-
-    public String getMessage() {
-        return this.message;
-    }
 }

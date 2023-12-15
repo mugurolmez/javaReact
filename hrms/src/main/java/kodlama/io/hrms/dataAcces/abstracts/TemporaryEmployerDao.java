@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TemporaryEmployerDao extends JpaRepository<TemporaryEmployer,Integer> {
+public interface TemporaryEmployerDao extends JpaRepository<TemporaryEmployer, Integer> {
 
- TemporaryEmployer findByTemporaryEmployerId(int temporaryEmployerId);
+    TemporaryEmployer findByTemporaryEmployerId(int temporaryEmployerId);
 
 }

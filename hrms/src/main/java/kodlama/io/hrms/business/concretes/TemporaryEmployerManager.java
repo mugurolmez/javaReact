@@ -23,20 +23,12 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-
 public class TemporaryEmployerManager implements TemporaryEmployerService {
+    @Autowired
     private TemporaryEmployerDao temporaryEmployerDao;
     private ModelMapperService modelMapperService;
     private EmailService emailService;
     private TemporaryEmployerBusinessRules temporaryEmployerBusinessRules;
-
-    @Autowired
-    public TemporaryEmployerManager(TemporaryEmployerDao temporaryEmployerDao, TemporaryEmployerBusinessRules temporaryEmployerBusinessRules, ModelMapperService modelMapperService, EmailService emailService) {
-        this.temporaryEmployerDao = temporaryEmployerDao;
-        this.modelMapperService = modelMapperService;
-        this.emailService = emailService;
-        this.temporaryEmployerBusinessRules = temporaryEmployerBusinessRules;
-    }
 
     @Override
     public Result add(AddTemporaryEmployerRequest addTemporaryEmployerRequest) {

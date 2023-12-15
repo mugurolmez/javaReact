@@ -20,12 +20,10 @@ public class JobDescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int jobDescriptionId;
 
-
     @Column(unique = true, name = "job_description_name")
     @NotNull
     @NotBlank
     private String jobDescriptionName;
-
 
     @OneToMany(mappedBy = "jobDescription")//class ismi
     private List<JobAdvertisement> JobAdvertisementNames;

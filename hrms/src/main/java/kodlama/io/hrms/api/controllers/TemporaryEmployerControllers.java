@@ -6,6 +6,7 @@ import kodlama.io.hrms.business.dtos.requests.AddTemporaryEmployerRequest;
 import kodlama.io.hrms.business.dtos.responses.GetAllTemporaryEmployersResponse;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +20,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/temporaryEmployers")
-
+@AllArgsConstructor
 public class TemporaryEmployerControllers {
-
-    private TemporaryEmployerService temporaryEmployerService;
-
     @Autowired
-    public TemporaryEmployerControllers(TemporaryEmployerService temporaryEmployerService) {
-        this.temporaryEmployerService = temporaryEmployerService;
-    }
-
+    private TemporaryEmployerService temporaryEmployerService;
 
     @GetMapping("/getall")
     public List<GetAllTemporaryEmployersResponse> getAll() {

@@ -1,11 +1,8 @@
 package kodlama.io.hrms.business.abstracts;
 
 import kodlama.io.hrms.business.dtos.responses.GetAllImagesResponse;
-import kodlama.io.hrms.business.dtos.responses.GetAllJobSeekersResponse;
-import kodlama.io.hrms.business.dtos.responses.GetAllSchoolResponse;
 import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.entities.Image;
-import org.springframework.http.ResponseEntity;
+import kodlama.io.hrms.entities.cvEntities.Image;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

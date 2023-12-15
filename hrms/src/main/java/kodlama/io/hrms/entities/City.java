@@ -15,8 +15,10 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id")
     private int id;
+
     @Column(name = "plate_number")
     private String plateNumber;
-    @Column(name = "name")
-    private String Name;
+
+    @Column(name = "city_name")
+    private String cityName;
 }

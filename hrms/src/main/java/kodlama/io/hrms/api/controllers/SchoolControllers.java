@@ -3,12 +3,10 @@ package kodlama.io.hrms.api.controllers;
 import jakarta.validation.Valid;
 import kodlama.io.hrms.business.abstracts.SchoolService;
 import kodlama.io.hrms.business.dtos.requests.AddSchoolRequest;
-import kodlama.io.hrms.business.dtos.responses.GetAllSchoolResponse;
+import kodlama.io.hrms.business.dtos.responses.cvitems.GetAllCvSchoolResponse;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
-import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.entities.School;
-import org.modelmapper.internal.bytebuddy.asm.Advice;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +20,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/schools")
+@AllArgsConstructor
 public class SchoolControllers {
     @Autowired
     private SchoolService schoolService;
-
-    public SchoolControllers(SchoolService schoolService) {
-        this.schoolService = schoolService;
-    }
 
     @PostMapping(value = "/add")
     public ResponseEntity<?> add(@Valid @RequestBody AddSchoolRequest addSchoolRequest) {
@@ -37,8 +32,8 @@ public class SchoolControllers {
     }
 
     @GetMapping("/{jobSeekerId}")//{} değişkenden gelecek değer
-    public DataResult findAllByJobSeekerJobSeekerId(@PathVariable int jobSeekerId) {
-        return schoolService.findAllByJobSeekerJobSeekerId(jobSeekerId);
+    public DataResult<List<GetAllCvSchoolResponse>> findAllByJobSeekerJobSeekerId(@PathVariable int jobSeekerId) {
+        return this.schoolService.findAllByJobSeeker_JobSeekerId(jobSeekerId);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

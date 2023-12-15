@@ -4,7 +4,7 @@ import kodlama.io.hrms.business.abstracts.PersonService;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAcces.abstracts.PersonDao;
-import kodlama.io.hrms.entities.Person;
+import kodlama.io.hrms.entities.userEntities.Person;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
